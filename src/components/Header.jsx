@@ -1,14 +1,13 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef } from "react";
 
-import CartModal from './CartModal.jsx';
-import { CartContext } from '../store/shopping-cart-context.jsx';
+import CartModal from "./CartModal.jsx";
+import { CartContext } from "../store/shopping-cart-context.jsx";
 
-export default function Header({ cart}) {
-  const {updateCartItemQuantity} = useContext(CartContext)
+export default function Header() {
+  const { items } = useContext(CartContext);
   const modal = useRef();
 
-
-  const cartQuantity = cart.items.length;
+  const cartQuantity = items.length;
 
   function handleOpenCartClick() {
     modal.current.open();
@@ -27,13 +26,7 @@ export default function Header({ cart}) {
 
   return (
     <>
-      <CartModal
-        ref={modal}
-        cartItems={cart.items}
-        onUpdateCartItemQuantity={updateCartItemQuantity}
-        title="Your Cart"
-        actions={modalActions}
-      />
+      <CartModal ref={modal} title="Your Cart" actions={modalActions} />
       <header id="main-header">
         <div id="main-title">
           <img src="logo.png" alt="Elegant model" />
